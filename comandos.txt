@@ -1,0 +1,14 @@
+php artisan make:model Metas --resource -m
+
+tenemos que isntalr pare aejeucta tl program
+
+redis para php
+
+luegop para lñas pteciones con curl
+sudo apt-get install php8.1-curl
+php -m | grep curl
+sudo systemctl restart php8.1-fpm
+sudo systemctl restart nginx
+y en php-fpm  en el ini
+;extension=curl  // quitarle la coma
+

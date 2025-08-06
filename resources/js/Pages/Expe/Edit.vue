@@ -101,6 +101,7 @@ import { Head } from '@inertiajs/vue3';
 </template>
 
 <script>
+import Swal from 'sweetalert2'
 export default {
     data() {
         return {
@@ -108,6 +109,7 @@ export default {
             oficinas: [],
             entidades: [],
             archivos: [],
+            importacion: true,
             form: {
                 oficina_id: '',
                 entidad_id: '',
@@ -152,6 +154,7 @@ export default {
             this.archivos = Array.from(e.target.files);
         },
         async actualizar() {
+            this.importacion= false
             const formData = new FormData();
             for (const key in this.form) {
                 formData.append(key, this.form[key]);
@@ -160,11 +163,42 @@ export default {
                 formData.append('documentos[]', file);
             }
 
-            await axios.post(`/api/expedientes/${this.expedienteId}?_method=PUT`, formData);
+             await axios.post(`/api/expedientes/${this.expedienteId}?_method=PUT`, formData)
+             .then(response => {
+                    Swal.fire({
+                    title: 'Mensaje',
+                    text: 'Documento Grabado',
+                    icon: 'success',
+                    timer: 1000, // Tiempo en milisegundos (en este caso, 5 segundos)
+                    timerProgressBar: true,
+                    showConfirmButton: false // No muestra el botón de confirmación
+                })
+
+                this.importacion= true                                     
+                this.$inertia.visit('/listobras', { method: 'get' }); // Esto redirigirá a la ruta principal
+             
+             })
+             .catch(error => {
+                this.importacion= true
+                 Swal.fire({
+                    icon: 'error',
+                    title: 'Error en la grabacion del documento',
+                    text: 'Ocurrio un error al intentar grabar,'+error,
+                    confirmButtonText: 'Aceptar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        console.log('El usuario aceptó el mensaje de error.');
+                    }
+                });
+          
+             });
 
 
-            this.$inertia.visit('/listobras', { method: 'get' }); // Esto redirigirá a la ruta principal
-            alert("Expediente actualizado correctamente");
+
+
+
+            
+            //alert("Expediente actualizado correctamente");
         }
     },
     mounted() {

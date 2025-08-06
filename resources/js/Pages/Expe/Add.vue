@@ -86,6 +86,18 @@ import { Head } from '@inertiajs/vue3';
                 </div>
             </div>
 
+
+                <div v-if="importacion">                
+                                                    
+                </div>
+                <div v-else class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                        <div class="ml-2 absolute animate-spin rounded-full h-10 w-10 border-t-8 border-red-500">
+                                                                            <!-- Contenido del spinner -->
+                        </div>
+                                    
+                                    
+                </div>
+
             <!-- Acciones -->
             <div class="mt-4 flex justify-between items-center">
                 <div>
@@ -102,12 +114,14 @@ import { Head } from '@inertiajs/vue3';
 </template>
 
 <script>
+import Swal from 'sweetalert2'
 export default {
     data() {
         return {
             oficinas: [],
             entidades: [],
             archivos: [],
+            importacion: true,
             total: 0,
             form: {
                 oficina_id: '',
@@ -118,11 +132,11 @@ export default {
                 fechas_extremos: '',
            
                 nro_archivo: '',
-                unidad_conservacion: '',
+                unidad_conservacion: 'ARCHIVADOR DE PALANCA',
                 serie_documental: '',
                 nro_comprobantes: '',
-                ubicacion_estante: '',
-                valor_serie_documental: 'T',
+                ubicacion_estante: 'SEC.',
+                valor_serie_documental: 'P',
                 folios: '',
                 soporte_papel: '',
                 es_copia_original: true,
@@ -137,6 +151,7 @@ export default {
     },
     methods: {
         async registrar() {
+            this.importacion= false
             const formData = new FormData();
             for (const key in this.form) {
                 formData.append(key, this.form[key]);
@@ -147,43 +162,60 @@ export default {
 
             //console.log(formData);
 
-            await axios.post('/api/expedientes', formData);
+            await axios.post('/api/expedientes', formData)
+             .then(response => {
+                    Swal.fire({
+                    title: 'Mensaje',
+                    text: 'Documento Grabado',
+                    icon: 'success',
+                    timer: 1000, // Tiempo en milisegundos (en este caso, 5 segundos)
+                    timerProgressBar: true,
+                    showConfirmButton: false // No muestra el botón de confirmación
+                })
+                this.importacion= true
 
-            this.actualizarConteo();
-            alert("Registro exitoso");
-
-           this.form = {
-            oficina_id: '',
-            entidad_id: '',
-            periodo: '',
-            anio_elaboracion: '',
-            seccion: '',
-            fechas_extremos: '',
-            nro_archivo: '',
-            unidad_conservacion: '',
-            serie_documental: '',
-            nro_comprobantes: '',
-            ubicacion_estante: '',
-            valor_serie_documental: 'T',
-            folios: '',
-            soporte_papel: '',
-            es_copia_original: true,
-            anio_extremo_inicio: '',
-            anio_extremo_fin: '',
-            color: '',
-            observaciones: '',
-            estado_archivador: 'B',
-            ubicacion_actual: 'A.C'
-        };
-        this.archivos = [];
-       this.$refs.inputArchivos.value = '';
-
-
-
-
-
-
-
+                this.actualizarConteo();         
+                    this.form = {
+                        oficina_id: '',
+                        entidad_id: '',
+                        periodo: '',
+                        anio_elaboracion: '',
+                        seccion: '',
+                        fechas_extremos: '',
+                        nro_archivo: '',
+                        unidad_conservacion: '',
+                        serie_documental: '',
+                        nro_comprobantes: '',
+                        ubicacion_estante: '',
+                        valor_serie_documental: 'T',
+                        folios: '',
+                        soporte_papel: '',
+                        es_copia_original: true,
+                        anio_extremo_inicio: '',
+                        anio_extremo_fin: '',
+                        color: '',
+                        observaciones: '',
+                        estado_archivador: 'B',
+                        ubicacion_actual: 'A.C'
+                    };
+                    this.archivos = [];
+                this.$refs.inputArchivos.value = ''; 
+             
+             })
+             .catch(error => {
+                this.importacion= true
+                 Swal.fire({
+                    icon: 'error',
+                    title: 'Error en la grabacion del documento',
+                    text: 'Ocurrio un error al intentar grabar,'+error,
+                    confirmButtonText: 'Aceptar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        console.log('El usuario aceptó el mensaje de error.');
+                    }
+                });
+          
+             });      
 
         },
         handleArchivos(e) {

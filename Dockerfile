@@ -33,7 +33,7 @@ RUN composer install --optimize-autoloader --no-dev --prefer-dist
 
 # Permisos
 RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html/storage
+    && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
 # Expone el puerto estándar de php-fpm
 EXPOSE 9000

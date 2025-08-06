@@ -36,10 +36,10 @@ import { Head } from '@inertiajs/vue3';
                 <input v-model="form.anio_elaboracion" placeholder="Año elaboración" class="w-full rounded-lg border-gray-300 focus:border-red-500 focus:ring-indigo-500 p-2 pe-12 text-sm shadow-sm" />
                 <input v-model="form.seccion" placeholder="Sección" class="w-full rounded-lg border-gray-300 focus:border-red-500 focus:ring-indigo-500 p-2 pe-12 text-sm shadow-sm" />
                 <input type="date" v-model="form.fechas_extremos" class="w-full rounded-lg border-gray-300 focus:border-red-500 focus:ring-indigo-500 p-2 pe-12 text-sm shadow-sm" />
-                <input v-model="form.nro_archivo" placeholder="Nro archivo" class="w-full rounded-lg border-gray-300 focus:border-red-500 focus:ring-indigo-500 p-2 pe-12 text-sm shadow-sm" />
+                <input v-model="form.nro_archivo" placeholder="Nro archivador" class="w-full rounded-lg border-gray-300 focus:border-red-500 focus:ring-indigo-500 p-2 pe-12 text-sm shadow-sm" />
                 <input v-model="form.unidad_conservacion" placeholder="Unidad conservación" class="w-full rounded-lg border-gray-300 focus:border-red-500 focus:ring-indigo-500 p-2 pe-12 text-sm shadow-sm" />
                 <input v-model="form.serie_documental" placeholder="Serie documental" class="w-full rounded-lg border-gray-300 focus:border-red-500 focus:ring-indigo-500 p-2 pe-12 text-sm shadow-sm" />
-                <input v-model="form.nro_comprobantes" placeholder="Nro comprobantes" class="w-full rounded-lg border-gray-300 focus:border-red-500 focus:ring-indigo-500 p-2 pe-12 text-sm shadow-sm" />
+                <input v-model="form.nro_comprobantes" placeholder="Nro de Documento" class="w-full rounded-lg border-gray-300 focus:border-red-500 focus:ring-indigo-500 p-2 pe-12 text-sm shadow-sm" />
                 <input v-model="form.ubicacion_estante" placeholder="Ubicación estante" class="w-full rounded-lg border-gray-300 focus:border-red-500 focus:ring-indigo-500 p-2 pe-12 text-sm shadow-sm" />
                 <select v-model="form.valor_serie_documental" class="w-full rounded-lg border-gray-300 focus:border-red-500 focus:ring-indigo-500 p-2 pe-12 text-sm shadow-sm">
                     <option value="T">Temporal</option>
@@ -47,9 +47,9 @@ import { Head } from '@inertiajs/vue3';
                 </select>
                 <input v-model="form.folios" placeholder="Folios" class="w-full rounded-lg border-gray-300 focus:border-red-500 focus:ring-indigo-500 p-2 pe-12 text-sm shadow-sm" />
                 <input v-model="form.soporte_papel" placeholder="Soporte papel" class="w-full rounded-lg border-gray-300 focus:border-red-500 focus:ring-indigo-500 p-2 pe-12 text-sm shadow-sm" />
-                <select v-model="form.es_copia_original" class="w-full rounded-lg border-gray-300 focus:border-red-500 focus:ring-indigo-500 p-2 pe-12 text-sm shadow-sm">
-                    <option :value="1">Sí</option>
-                    <option :value="0">No</option>
+                <select value=0  v-model="form.es_copia_original" class="w-full rounded-lg border-gray-300 focus:border-red-500 focus:ring-indigo-500 p-2 pe-12 text-sm shadow-sm">
+                    <option :value="1">ORIGINAL</option>
+                    <option :value="0">COPIA</option>
                 </select>
                 <input v-model="form.anio_extremo_inicio" placeholder="Año extremo inicio" class="w-full rounded-lg border-gray-300 focus:border-red-500 focus:ring-indigo-500 p-2 pe-12 text-sm shadow-sm" />
                 <input v-model="form.anio_extremo_fin" placeholder="Año extremo fin" class="w-full rounded-lg border-gray-300 focus:border-red-500 focus:ring-indigo-500 p-2 pe-12 text-sm shadow-sm" />

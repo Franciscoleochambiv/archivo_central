@@ -143,7 +143,7 @@ export default {
                 anio_extremo_inicio: '',
                 anio_extremo_fin: '',
                 color: '',
-                observaciones: '',
+                observaciones: 'N/A',
                 estado_archivador: 'B',
                 ubicacion_actual: 'A.C',
             }

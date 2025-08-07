@@ -25,7 +25,7 @@
                     </div>
 
                     <div class="flex flex-col">
-                        <label class="text-sm text-gray-600 dark:text-gray-300">N° de comprobantes</label>
+                        <label class="text-sm text-gray-600 dark:text-gray-300">N° de Documento</label>
                         <input v-model="filtros.comprobante" type="text" class="border-gray-300 rounded-md w-48" placeholder="Ej: 50" />
                     </div>
 
@@ -49,24 +49,22 @@
 
                             
                             <hr class="my-3 border-t" />   
-                           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                            
+                           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">                            
                             <p class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition"><strong>Oficina:</strong> {{ r.oficina.nombre }}</p>
                             <p><strong>ID:</strong> {{ r.id}}</p>
                             <p><strong>Periodo:</strong> {{ r.periodo }}</p>
-                            <p><strong>Año Elaboración:</strong> {{ r.anio_elaboracion }}</p>
-                            <p><strong>Sección:</strong> {{ r.seccion }}</p>
-                            <p><strong>Fechas Extremos:</strong> {{ r.fechas_extremos }}</p>
+                            <p><strong>Fechas de Registro Doc:</strong> {{ r.fechas_extremos }}</p>
+                            <p><strong>Sección:</strong> {{ r.seccion }}</p>                            
                             <p><strong>Item:</strong> {{ r.item }}</p>
                             <p><strong>Nro. Archivo:</strong> {{ r.nro_archivo }}</p>
                             <p><strong>Unidad de Conservación:</strong> {{ r.unidad_conservacion }}</p>
                             <p><strong>Serie Documental:</strong> {{ r.serie_documental }}</p>
-                            <p><strong>Nro. Comprobantes:</strong> {{ r.nro_comprobantes }}</p>
-                            <p><strong>Ubicación Estante:</strong> {{ r.ubicacion_estante }}</p>
+                            <p><strong>Nro. Documento:</strong> {{ r.nro_comprobantes }}</p>
+                            <p><strong>Ubicación/Estante:</strong> {{ r.ubicacion_estante }}</p>
                             <p><strong>Valor Serie Documental:</strong> {{ r.valor_serie_documental }}</p>
                             <p><strong>Folios:</strong> {{ r.folios }}</p>
                             <p><strong>Soporte Papel:</strong> {{ r.soporte_papel }}</p>
-                            <p><strong>Es Copia Original:</strong> {{ r.es_copia_original ? 'Sí' : 'No' }}</p>
+                            <p><strong>Estado Documental:</strong> {{ r.es_copia_original ? 'Sí' : 'No' }}</p>
                             <p><strong>Año Extremo Inicio:</strong> {{ r.anio_extremo_inicio }}</p>
                             <p><strong>Año Extremo Fin:</strong> {{ r.anio_extremo_fin }}</p>
                             <p><strong>Color:</strong> {{ r.color || 'N/A' }}</p>
